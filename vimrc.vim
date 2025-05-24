@@ -1,1 +1,1 @@
-/home/klape/.vimrc
+/home/klape/conf/.vimrc
