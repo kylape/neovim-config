@@ -6,13 +6,17 @@ return {
     -- add any opts here
     -- for example
     provider = "claude",
-    claude = {
-      endpoint = "https://api.anthropic.com",
-      model = "claude-3-5-sonnet-20241022",
-      timeout = 30000, -- Timeout in milliseconds
-      temperature = 0,
-      max_tokens = 4096,
-      disable_tools = true, -- disable tools!
+    providers = {
+      claude = {
+        endpoint = "https://api.anthropic.com",
+        model = "claude-3-5-sonnet-20241022",
+        timeout = 30000, -- Timeout in milliseconds
+        extra_request_body = {
+          temperature = 0,
+          max_tokens = 4096,
+        },
+        disable_tools = true, -- disable tools!
+      },
     },
   },
   -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
