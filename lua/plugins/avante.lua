@@ -15,7 +15,7 @@ return {
           temperature = 0,
           max_tokens = 4096,
         },
-        disable_tools = true, -- disable tools!
+        disabled_tools = { "python" },
       },
     },
   },
