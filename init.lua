@@ -173,6 +173,21 @@ nvim_lsp['yamlls'].setup({
   }
 })
 
+nvim_lsp['rust_analyzer'].setup({
+  on_attach = on_attach,
+  flags = {
+    debounce_text_changes = 150,
+  },
+  settings = {
+    cargo = {
+      allFeatures = true,
+    },
+    checkOnSave = {
+      command = "clippy",
+    },
+  },
+})
+
 require'lspconfig'.terraformls.setup{}
 
 local vimrc = vim.fn.stdpath("config") .. "/vimrc.vim"
