@@ -39,7 +39,7 @@ require('telescope').setup{
 }
 
 require('telekasten').setup({
-  home = vim.fn.expand("~/src/zettelkasten"),
+  home = vim.fn.expand("~/workspace/zettelkasten"),
 })
 
 require("mcphub").setup({
