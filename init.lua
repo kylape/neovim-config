@@ -85,8 +85,6 @@ vim.keymap.set("n", "<leader>zI", "<cmd>Telekasten insert_img_link<CR>")
 -- Call insert link automatically when we start typing a link
 vim.keymap.set("i", "[[", "<cmd>Telekasten insert_link<CR>")
 
-local nvim_lsp = require('lspconfig')
-
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
@@ -120,19 +118,19 @@ local on_attach = function(client, bufnr)
 
 end
 
--- Use a loop to conveniently call 'setup' on multiple servers and
--- map buffer local keybindings when the language server attaches
+-- Use vim.lsp.config instead of lspconfig
 local servers = { 'pyright', 'ts_ls', 'clangd' }
 for _, lsp in ipairs(servers) do
-  nvim_lsp[lsp].setup {
+  vim.lsp.config(lsp, {
     on_attach = on_attach,
     flags = {
       debounce_text_changes = 150,
     }
-  }
+  })
+  vim.lsp.enable(lsp)
 end
 
-nvim_lsp['gopls'].setup {
+vim.lsp.config('gopls', {
   on_attach = on_attach,
   flags = {
     debounce_text_changes = 150,
@@ -140,9 +138,10 @@ nvim_lsp['gopls'].setup {
   settings = { gopls = {
     buildFlags = {"-tags=test_e2e,sql_integration,scanner_e2e"}
   }},
-}
+})
+vim.lsp.enable('gopls')
 
-nvim_lsp['groovyls'].setup{
+vim.lsp.config('groovyls', {
   on_attach = on_attach,
   flags = {
     debounce_text_changes = 150,
@@ -151,9 +150,10 @@ nvim_lsp['groovyls'].setup{
     cmd = { "/usr/lib/jvm/java-17-openjdk/bin/java", "-jar", "/home/klape/src/groovy-language-server/build/libs/groovy-language-server-all.jar" },
   }},
   cmd = { "/usr/lib/jvm/java-17-openjdk/bin/java", "-jar", "/home/klape/src/groovy-language-server/build/libs/groovy-language-server-all.jar" },
-}
+})
+vim.lsp.enable('groovyls')
 
-nvim_lsp['yamlls'].setup({
+vim.lsp.config('yamlls', {
   on_attach = on_attach,
   flags = {
     debounce_text_changes = 150,
@@ -172,8 +172,9 @@ nvim_lsp['yamlls'].setup({
     },
   }
 })
+vim.lsp.enable('yamlls')
 
-nvim_lsp['rust_analyzer'].setup({
+vim.lsp.config('rust_analyzer', {
   on_attach = on_attach,
   flags = {
     debounce_text_changes = 150,
@@ -187,8 +188,10 @@ nvim_lsp['rust_analyzer'].setup({
     },
   },
 })
+vim.lsp.enable('rust_analyzer')
 
-require'lspconfig'.terraformls.setup{}
+vim.lsp.config('terraformls', {})
+vim.lsp.enable('terraformls')
 
 local vimrc = vim.fn.stdpath("config") .. "/vimrc.vim"
 vim.cmd.source(vimrc)
