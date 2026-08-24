@@ -1,5 +1,4 @@
 {
-  "avante.nvim": { "branch": "main", "commit": "e538060156694eca378b35a28e78e1c7933b1296" },
   "copilot.lua": { "branch": "master", "commit": "f7732213e41995439171f35bdd2bf1c809f8e8e7" },
   "dressing.nvim": { "branch": "master", "commit": "2d7c2db2507fa3c4956142ee607431ddb2828639" },
   "fzf-lua": { "branch": "main", "commit": "f8cf874c7c78deaddb028b80b7116c50cb53e88d" },
