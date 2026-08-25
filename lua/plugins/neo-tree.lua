@@ -18,7 +18,6 @@ return {
       filesystem = {
         commands = {},
         window = {},
-        },
       },
     })
   end,
