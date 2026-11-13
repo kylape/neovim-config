@@ -171,5 +171,22 @@ vim.lsp.enable('rust_analyzer')
 vim.lsp.config('terraformls', {})
 vim.lsp.enable('terraformls')
 
+vim.g.clipboard = {
+  name = "herdr-osc52",
+  copy = {
+    ["+"] = function(lines, _)
+      local data = table.concat(lines, "\n")
+      local b64 = vim.base64.encode(data)
+      io.write("\27]52;c;" .. b64 .. "\7")
+      io.flush()
+    end,
+    ["*"] = function(lines, _) vim.g.clipboard.copy["+"](lines, _) end,
+  },
+  paste = {
+    ["+"] = function() return { vim.fn.getreg("") } end,
+    ["*"] = function() return { vim.fn.getreg("") } end,
+  },
+}
+
 local vimrc = vim.fn.stdpath("config") .. "/vimrc.vim"
 vim.cmd.source(vimrc)
